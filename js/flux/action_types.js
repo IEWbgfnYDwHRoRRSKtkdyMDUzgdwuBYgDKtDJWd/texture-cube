@@ -12,7 +12,6 @@ export const CUBE_HEIGHT = 'cubeHeight'
 export const CUBE_WIDTH = 'cubeWidth'
 export const CUBE_DEPTH = 'cubeDepth'
 
-
 export const ROTATION_TOP = 'rotationTop'
 export const ROTATION_BOTTOM = 'rotationBottom'
 export const ROTATION_LEFT = 'rotationLeft'

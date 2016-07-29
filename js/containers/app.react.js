@@ -6,7 +6,7 @@ import Controls from '../components/controls.react'
 import World from '../components/world.react'
 import Stats from '../components/stats.react'
 import Actions from '../flux/actions'
-import CabinStore from '../flux/cabin_store'
+import CubeStore from '../flux/cube_store'
 import SceneStore from '../flux/scene_store'
 import settings from '../settings'
 import {getRandomColor} from '../util'
@@ -21,13 +21,13 @@ class App extends Component{
   static displayName = 'App'
 
   static getStores() {
-    return [SceneStore, CabinStore]
+    return [SceneStore, CubeStore]
   }
 
   static calculateState(){
     return {
       scene: SceneStore.getState(),
-      cube: CabinStore.getState(),
+      cube: CubeStore.getState(),
     }
   }
 

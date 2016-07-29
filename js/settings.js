@@ -53,7 +53,7 @@ export default{
 
   cube: {
     width: 100,
-    depth: 100, // actually the length of the cabin
+    depth: 100,
     height: 100,
     min: {
       width: 10,

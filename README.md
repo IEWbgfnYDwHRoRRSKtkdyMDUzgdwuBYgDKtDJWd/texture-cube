@@ -1,3 +1,3 @@
 # texture-cube
 
-[Live example](http://abumarkub.net/cube/)
+[Live example](https://abudaan.github.io/cube/)
