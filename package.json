@@ -1,0 +1,37 @@
+{
+  "name": "push-react-web",
+  "private": false,
+  "devDependencies": {
+    "babel-cli": "*",
+    "babel-eslint": "*",
+    "babel-plugin-transform-class-properties": "*",
+    "babel-polyfill": "*",
+    "babel-preset-es2015": "*",
+    "babel-preset-react": "*",
+    "babel-preset-stage-0": "*",
+    "babelify": "*",
+    "browserify": "*",
+    "eslint": "*",
+    "eslint-plugin-babel": "*",
+    "eslint-plugin-react": "*",
+    "exorcist": "*",
+    "uglify": "*",
+    "watchify": "*"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "dependencies": {
+    "isomorphic-fetch": "*",
+    "react": "*",
+    "react-dom": "*",
+    "flux": "*",
+    "three": "*",
+    "react-three-renderer": "git://github.com/abudaan/react-three-renderer"
+  },
+  "scripts": {
+    "watch": "watchify js/app.js -t [ babelify ] -o build/app.js --debug --verbose",
+    "build": "NODE_ENV=production browserify js/app.js -t [ babelify ] --debug | exorcist build/app.js.map | uglifyjs -c > build/app.js",
+    "babel": "npm run babel-node"
+  }
+}
