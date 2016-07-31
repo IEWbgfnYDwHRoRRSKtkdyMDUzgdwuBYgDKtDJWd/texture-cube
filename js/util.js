@@ -119,7 +119,6 @@ export function getUVS(rotations){
   let i = 0
 
   rotations.forEach(rotation => {
-
     switch(rotation){
       case 0:
         uvs[0][i++] = [edges[0], edges[1], edges[3]]

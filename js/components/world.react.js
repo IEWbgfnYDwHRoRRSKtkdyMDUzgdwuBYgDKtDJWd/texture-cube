@@ -13,21 +13,22 @@ export default class World extends Component{
     return (
       <group
         key={'world'}
+        position={this.props.position}
         quaternion={this.props.quaternion}
       >
         <mesh
-          key={'floor'}
-          position={this.props.position}
+          key={'surface-level'}
+          quaternion={new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), -Math.PI / 2)}
         >
           <planeBufferGeometry
-            key={'floor_geometry'}
+            key={'surface-level-geometry'}
             width={500}
             height={500}
             widthSegments={50}
             heightSegments={50}
           />
           <meshBasicMaterial
-            key={'floor_material'}
+            key={'surface-level-material'}
             opacity={0.5}
             color={0x333000}
             side={THREE.DoubleSide}

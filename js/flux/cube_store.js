@@ -26,7 +26,7 @@ class CubeStore extends ReduceStore{
       rotationTop: settings.cube.textureData.top.rotation,
       rotationFront: settings.cube.textureData.front.rotation,
       rotationBack: settings.cube.textureData.back.rotation,
-      position: new THREE.Vector3(0, 0, settings.cube.height / 2),
+      position: new THREE.Vector3(0, settings.cube.height / 2, 0),
     }
   }
 
@@ -51,7 +51,7 @@ class CubeStore extends ReduceStore{
       default:
     }
 
-    let position = new THREE.Vector3(0, 0, state.cubeHeight / 2)
+    let position = new THREE.Vector3(0, state.cubeHeight / 2, 0)
 
     state = {
       ...state,

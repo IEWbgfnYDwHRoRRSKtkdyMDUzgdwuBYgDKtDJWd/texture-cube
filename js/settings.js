@@ -24,13 +24,8 @@ export default{
   loadedImages: {},
 
   world: {
-    /**
-     * The root Object3D of the scenegraph is rotated -90 degrees over the
-     * X-axis so the camera doesn't look at the scene from above, but from the
-     * bottom side, which we experience as the front of the scenegraph
-     */
-    quaternion: new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), -Math.PI / 2),
-    position: new THREE.Vector3(),
+    quaternion: new THREE.Quaternion(),
+    position: new THREE.Vector3(0, 0, 0),
   },
 
   camera: {
@@ -69,7 +64,7 @@ export default{
       front: {
         img: 'front.jpg',
         anisotropy: 16,
-        rotation: -90,
+        rotation: 0,
         unity: {
           width: 50,
           height: 50,
@@ -78,7 +73,7 @@ export default{
       back: {
         img: 'back.jpg',
         anisotropy: 16,
-        rotation: 90,
+        rotation: 0,
         unity: {
           width: 50,
           height: 50,
@@ -87,7 +82,7 @@ export default{
       top: {
         img: 'top.jpg',
         anisotropy: 16,
-        rotation: -90,
+        rotation: 0,
         unity: {
           width: 50,
           height: 50,
@@ -96,7 +91,7 @@ export default{
       bottom: {
         img: 'bottom.jpg',
         anisotropy: 16,
-        rotation: 90,
+        rotation: 0,
         unity: {
           width: 50,
           height: 50,
@@ -114,7 +109,7 @@ export default{
       right: {
         img: 'right.jpg',
         anisotropy: 16,
-        rotation: 180,
+        rotation: 0,
         unity: {
           width: 50,
           height: 50,
