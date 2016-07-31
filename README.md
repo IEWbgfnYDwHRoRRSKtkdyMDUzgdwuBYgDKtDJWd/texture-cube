@@ -20,4 +20,4 @@ I am going to use MultiMaterial. A MultiMaterial is a material that consists of 
 
 
 ## Links
- - Very helpful article about texture mapping in Threejs [link](http://solutiondesign.com/blog/-/blogs/webgl-and-three-js-texture-mappi-1/)
+ - Article about texture mapping in Threejs [link](http://solutiondesign.com/blog/-/blogs/webgl-and-three-js-texture-mappi-1/)

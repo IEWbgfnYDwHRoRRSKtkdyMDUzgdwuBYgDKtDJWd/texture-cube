@@ -87,9 +87,9 @@ class Box extends Component {
         case 'left':
           rotation = rotationLeft
           if(rotation === 90 || rotation === -90){
-            material.map.repeat = new THREE.Vector2(z, y)
-          }else{
             material.map.repeat = new THREE.Vector2(y, z)
+          }else{
+            material.map.repeat = new THREE.Vector2(z, y)
           }
           break
 
@@ -97,9 +97,9 @@ class Box extends Component {
         case 'right':
           rotation = rotationRight
           if(rotation === 90 || rotation === -90){
-            material.map.repeat = new THREE.Vector2(z, y)
-          }else{
             material.map.repeat = new THREE.Vector2(y, z)
+          }else{
+            material.map.repeat = new THREE.Vector2(z, y)
           }
           break
 
@@ -107,18 +107,18 @@ class Box extends Component {
         case 'top':
           rotation = rotationTop
           if(rotation === 90 || rotation === -90){
-            material.map.repeat = new THREE.Vector2(x, z)
-          }else {
             material.map.repeat = new THREE.Vector2(z, x)
+          }else {
+            material.map.repeat = new THREE.Vector2(x, z)
           }
           break
 
         case 'bottom':
           rotation = rotationBottom
           if(rotation === 90 || rotation === -90){
-            material.map.repeat = new THREE.Vector2(x, z)
-          }else {
             material.map.repeat = new THREE.Vector2(z, x)
+          }else {
+            material.map.repeat = new THREE.Vector2(x, z)
           }
           break
 
@@ -126,9 +126,9 @@ class Box extends Component {
         case 'front':
           rotation = rotationFront
           if(rotation === 90 || rotation === -90){
-            material.map.repeat = new THREE.Vector2(x, y)
-          }else{
             material.map.repeat = new THREE.Vector2(y, x)
+          }else{
+            material.map.repeat = new THREE.Vector2(x, y)
           }
           break
 
@@ -136,9 +136,9 @@ class Box extends Component {
         case 'back':
           rotation = rotationBack
           if(rotation === 90 || rotation === -90){
-            material.map.repeat = new THREE.Vector2(x, y)
-          }else{
             material.map.repeat = new THREE.Vector2(y, x)
+          }else{
+            material.map.repeat = new THREE.Vector2(x, y)
           }
           break
 
@@ -155,11 +155,12 @@ class Box extends Component {
         position={position}
       >
         <boxGeometry
+          ref={'geometry'}
           key={THREE.Math.generateUUID()}
           width={width}
           height={height}
           depth={depth}
-          //faceVertexUvs={uvs}
+          faceVertexUvs={uvs}
           //dynamic={true}
           //uvsNeedUpdate={true}
         />

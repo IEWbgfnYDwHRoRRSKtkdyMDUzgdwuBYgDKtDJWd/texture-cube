@@ -102,10 +102,10 @@ export function getRandomColor(){
 
 
 const edges = [
+  new THREE.Vector2(0, 1),
   new THREE.Vector2(0, 0),
   new THREE.Vector2(1, 0),
   new THREE.Vector2(1, 1),
-  new THREE.Vector2(0, 1),
 ]
 
 /**
@@ -152,3 +152,9 @@ export function getUVS(rotations){
 
   return uvs;
 }
+
+/*
+0,1  0,0  1,1
+0,0  1,0  1,1
+*/
+
