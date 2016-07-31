@@ -3,8 +3,8 @@ import React, {Component, PropTypes}from 'react'
 import {getUVS} from '../util'
 
 const sides = [
-  'left',
   'right',
+  'left',
   'top',
   'bottom',
   'front',
@@ -56,8 +56,8 @@ class Box extends Component {
       cubeWidth: width,
       cubeDepth: depth,
       cubeHeight: height,
-      rotationLeft,
       rotationRight,
+      rotationLeft,
       rotationTop,
       rotationBottom,
       rotationFront,
@@ -66,8 +66,8 @@ class Box extends Component {
     } = this.props.data
 
     let uvs = getUVS([
-      rotationLeft,
       rotationRight,
+      rotationLeft,
       rotationTop,
       rotationBottom,
       rotationFront,
