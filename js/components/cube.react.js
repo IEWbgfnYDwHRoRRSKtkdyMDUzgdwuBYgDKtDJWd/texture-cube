@@ -1,6 +1,6 @@
 import THREE from 'three'
 import React, {Component, PropTypes}from 'react'
-import {getUVS, getUVs2} from '../util'
+import {getCubeGeometryUVs} from '../util'
 
 const sides = [
   'right',
@@ -28,22 +28,23 @@ class Box extends Component {
    * Creates the materials array that will be passed as a prop of the <multiMaterial> element
    */
   createMaterials = function(){
-    this.textureData = this.props.textureData
+    let textureData = this.props.textureData
     let loadedImages = this.props.loadedImages
 
     this.materials = []
+    this.unityValues = []
 
     for(let i = 0; i < 6; i++){
       let map
       if(i < 6){
-        let data = this.textureData[sides[i]]
+        let data = textureData[sides[i]]
         map = new THREE.Texture(loadedImages[data.img].cloneNode(true))
         map.anisotropy = data.anisotropy
         map.wrapT = THREE.RepeatWrapping
         map.wrapS = THREE.RepeatWrapping
         map.needsUpdate = true
-        map.key = sides[i]
         this.materials.push(new THREE.MeshBasicMaterial({map}))
+        this.unityValues.push(textureData[sides[i]].unity)
       }
     }
 
@@ -75,94 +76,8 @@ class Box extends Component {
       rotationBack,
     ]
 
-    let x = width / 50//unity.width
-    let y = height / 50//unity.height
-    let z = depth / 50//unity.width
-    let uvs = getUVs2(rotations, x, y, z)
+    let uvs = getCubeGeometryUVs(rotations, this.unityValues, width, height, depth)
 
-/*
-    let uvs = getUVS([
-      rotationRight,
-      rotationLeft,
-      rotationTop,
-      rotationBottom,
-      rotationFront,
-      rotationBack,
-    ])
-
-    this.materials.forEach(material => {
-      //console.log(this.textureData, material.map.key)
-      let key = material.map.key
-      let unity = this.textureData[key].unity
-      let x = width / unity.width
-      let y = height / unity.height
-      let z = depth / unity.width
-      let rotation
-      switch(key){
-        case 'left':
-          rotation = rotationLeft
-          if(rotation === 90 || rotation === -90){
-            material.map.repeat = new THREE.Vector2(y, z)
-          }else{
-            material.map.repeat = new THREE.Vector2(z, y)
-          }
-          break
-
-
-        case 'right':
-          rotation = rotationRight
-          if(rotation === 90 || rotation === -90){
-            material.map.repeat = new THREE.Vector2(y, z)
-          }else{
-            material.map.repeat = new THREE.Vector2(z, y)
-          }
-          break
-
-
-        case 'top':
-          rotation = rotationTop
-          if(rotation === 90 || rotation === -90){
-            material.map.repeat = new THREE.Vector2(z, x)
-          }else {
-            material.map.repeat = new THREE.Vector2(x, z)
-          }
-          break
-
-        case 'bottom':
-          rotation = rotationBottom
-          if(rotation === 90 || rotation === -90){
-            material.map.repeat = new THREE.Vector2(z, x)
-          }else {
-            material.map.repeat = new THREE.Vector2(x, z)
-          }
-          break
-
-
-        case 'front':
-          rotation = rotationFront
-          if(rotation === 90 || rotation === -90){
-            material.map.repeat = new THREE.Vector2(y, x)
-          }else{
-            material.map.repeat = new THREE.Vector2(x, y)
-          }
-          break
-
-
-        case 'back':
-          rotation = rotationBack
-          if(rotation === 90 || rotation === -90){
-            material.map.repeat = new THREE.Vector2(y, x)
-          }else{
-            material.map.repeat = new THREE.Vector2(x, y)
-          }
-          break
-
-
-        default:
-          // let's go for a walk in the woods
-      }
-    })
-*/
 
     return (
       <mesh
@@ -171,8 +86,7 @@ class Box extends Component {
         position={position}
       >
         <boxGeometry
-          ref={'geometry'}
-          //key={THREE.Math.generateUUID()}
+          key={THREE.Math.generateUUID()}
           width={width}
           height={height}
           depth={depth}

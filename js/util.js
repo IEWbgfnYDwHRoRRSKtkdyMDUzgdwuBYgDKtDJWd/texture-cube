@@ -101,129 +101,80 @@ export function getRandomColor(){
 }
 
 
-const edges = [
-  new THREE.Vector2(0, 1),
-  new THREE.Vector2(0, 0),
-  new THREE.Vector2(1, 0),
-  new THREE.Vector2(1, 1),
-]
+/*
+  0,1  0,0  1,1
+  0,0  1,0  1,1
+*/
+const getUVsByRotation = function(rotation, edges){
 
-/**
- * Converts an array of rotations in degrees in to an array of UV Vectors
- * @param {array<number>} rotations
- * @returns {array<array<THREE.Vector2>>}
- */
-export function getUVS(rotations){
+  let uvs = []
 
-  let uvs = [[]]
-  let i = 0
+  switch(rotation){
+    case 0:
+      uvs.push([edges[0], edges[1], edges[3]])
+      uvs.push([edges[1], edges[2], edges[3]])
+      break
 
-  rotations.forEach(rotation => {
-    switch(rotation){
-      case 0:
-        uvs[0][i++] = [edges[0], edges[1], edges[3]]
-        uvs[0][i++] = [edges[1], edges[2], edges[3]]
-        break
+    case 90:
+      uvs.push([edges[1], edges[2], edges[0]])
+      uvs.push([edges[2], edges[3], edges[0]])
+      break
 
-      case 90:
-        uvs[0][i++] = [edges[1], edges[2], edges[0]]
-        uvs[0][i++] = [edges[2], edges[3], edges[0]]
-        break
+    case -90:
+      uvs.push([edges[3], edges[0], edges[2]])
+      uvs.push([edges[0], edges[1], edges[2]])
+      break
 
-      case -90:
-        uvs[0][i++] = [edges[3], edges[0], edges[2]]
-        uvs[0][i++] = [edges[0], edges[1], edges[2]]
-        break
+    case 180:
+    case -180:
+      uvs.push([edges[2], edges[3], edges[1]])
+      uvs.push([edges[3], edges[0], edges[1]])
+      break
 
-      case 180:
-      case -180:
-        uvs[0][i++] = [edges[2], edges[3], edges[1]]
-        uvs[0][i++] = [edges[3], edges[0], edges[1]]
-        break
+    default:
+      uvs.push([edges[0], edges[1], edges[3]])
+      uvs.push([edges[1], edges[2], edges[3]])
 
-      default:
-        uvs[0][i++] = [edges[0], edges[1], edges[3]]
-        uvs[0][i++] = [edges[1], edges[2], edges[3]]
+      console.warn(`rotation ${rotation} not supported, only 90, -90, 180 and -180 are allowed`)
+  }
 
-        console.warn(`rotation ${rotation} not supported, only 90, -90, 180 and -180 are allowed`)
-
-    }
-  })
-
-  return uvs;
+  return uvs
 }
 
 
-export function getUVs2(rotations, x, y, z){
-
-  let edges1 = [
-    new THREE.Vector2(0, y),
-    new THREE.Vector2(0, 0),
-    new THREE.Vector2(z, 0),
-    new THREE.Vector2(z, y),
-  ]
-  let edges2 = [
-    new THREE.Vector2(0, z),
-    new THREE.Vector2(0, 0),
-    new THREE.Vector2(x, 0),
-    new THREE.Vector2(x, z),
-  ]
-  let edges3 = [
-    new THREE.Vector2(0, y),
-    new THREE.Vector2(0, 0),
-    new THREE.Vector2(x, 0),
-    new THREE.Vector2(x, y),
-  ]
+export function getCubeGeometryUVs(rotations, unityValues, width, height, depth){
 
   let uvs = [[]]
-  let i = 0
 
   rotations.forEach((rotation, r) => {
-    let edges
+    let unity = unityValues[r]
+    let w, s
+
     if(r < 2){
-      edges = edges1
+      w = depth / unity.width
+      s = height / unity.height
     }else if(r < 4){
-      edges = edges2
+      w = width / unity.width
+      s = depth / unity.height
     }else if(r < 6){
-      edges = edges3
+      w = width / unity.width
+      s = height / unity.height
     }
 
-    switch(rotation){
-      case 0:
-        uvs[0][i++] = [edges[0], edges[1], edges[3]]
-        uvs[0][i++] = [edges[1], edges[2], edges[3]]
-        break
-
-      case 90:
-        uvs[0][i++] = [edges[1], edges[2], edges[0]]
-        uvs[0][i++] = [edges[2], edges[3], edges[0]]
-        break
-
-      case -90:
-        uvs[0][i++] = [edges[3], edges[0], edges[2]]
-        uvs[0][i++] = [edges[0], edges[1], edges[2]]
-        break
-
-      case 180:
-      case -180:
-        uvs[0][i++] = [edges[2], edges[3], edges[1]]
-        uvs[0][i++] = [edges[3], edges[0], edges[1]]
-        break
-
-      default:
-        uvs[0][i++] = [edges[0], edges[1], edges[3]]
-        uvs[0][i++] = [edges[1], edges[2], edges[3]]
-
-        console.warn(`rotation ${rotation} not supported, only 90, -90, 180 and -180 are allowed`)
-
+    if(rotation === 90 || rotation === -90){
+      [w, s] = [s, w]
     }
+
+    let edges = [
+      new THREE.Vector2(0, s),
+      new THREE.Vector2(0, 0),
+      new THREE.Vector2(w, 0),
+      new THREE.Vector2(w, s),
+    ]
+
+    uvs[0].push(...getUVsByRotation(rotation, edges))
   })
 
-  return uvs;
+  return uvs
 }
-
-/*
-0,1  0,0  1,1
-0,0  1,0  1,1
-*/
 
