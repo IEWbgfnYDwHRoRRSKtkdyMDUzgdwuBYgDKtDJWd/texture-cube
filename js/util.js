@@ -148,28 +148,28 @@ export function getCubeGeometryUVs(rotations, unityValues, width, height, depth)
 
   rotations.forEach((rotation, r) => {
     let unity = unityValues[r]
-    let w, s
+    let u, v
 
     if(r < 2){
-      w = depth / unity.width
-      s = height / unity.height
+      u = depth / unity.width
+      v = height / unity.height
     }else if(r < 4){
-      w = width / unity.width
-      s = depth / unity.height
+      u = width / unity.width
+      v = depth / unity.height
     }else if(r < 6){
-      w = width / unity.width
-      s = height / unity.height
+      u = width / unity.width
+      v = height / unity.height
     }
 
     if(rotation === 90 || rotation === -90){
-      [w, s] = [s, w]
+      [u, v] = [v, u]
     }
 
     let edges = [
-      new THREE.Vector2(0, s),
+      new THREE.Vector2(0, v),
       new THREE.Vector2(0, 0),
-      new THREE.Vector2(w, 0),
-      new THREE.Vector2(w, s),
+      new THREE.Vector2(u, 0),
+      new THREE.Vector2(u, v),
     ]
 
     uvs[0].push(...getUVsByRotation(rotation, edges))
