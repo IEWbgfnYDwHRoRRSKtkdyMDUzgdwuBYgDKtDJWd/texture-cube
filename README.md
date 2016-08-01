@@ -10,8 +10,8 @@ There are several ways you can apply a texture to a cube:
 
 I am going to use MultiMaterial. A MultiMaterial is a material that consists of multiple materials. You can pass an array containing the materials you want to use to the property `materials`. To apply a certain material to a certain face (side) of the cube, the index of the material in the materials array should match the index of the face in the geometry. In a CubeGeometry the face indices are as follows:
 
- 0. right
- 1. left
+ 0. left
+ 1. right
  2. back
  3. front
  4. top

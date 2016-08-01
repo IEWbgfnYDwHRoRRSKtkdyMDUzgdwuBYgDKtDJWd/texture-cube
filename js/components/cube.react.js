@@ -1,6 +1,6 @@
 import THREE from 'three'
 import React, {Component, PropTypes}from 'react'
-import {getUVS} from '../util'
+import {getUVS, getUVs2} from '../util'
 
 const sides = [
   'right',
@@ -65,6 +65,22 @@ class Box extends Component {
       position,
     } = this.props.data
 
+
+    let rotations = [
+      rotationRight,
+      rotationLeft,
+      rotationTop,
+      rotationBottom,
+      rotationFront,
+      rotationBack,
+    ]
+
+    let x = width / 50//unity.width
+    let y = height / 50//unity.height
+    let z = depth / 50//unity.width
+    let uvs = getUVs2(rotations, x, y, z)
+
+/*
     let uvs = getUVS([
       rotationRight,
       rotationLeft,
@@ -82,7 +98,6 @@ class Box extends Component {
       let y = height / unity.height
       let z = depth / unity.width
       let rotation
-
       switch(key){
         case 'left':
           rotation = rotationLeft
@@ -147,6 +162,7 @@ class Box extends Component {
           // let's go for a walk in the woods
       }
     })
+*/
 
     return (
       <mesh
@@ -156,7 +172,7 @@ class Box extends Component {
       >
         <boxGeometry
           ref={'geometry'}
-          key={THREE.Math.generateUUID()}
+          //key={THREE.Math.generateUUID()}
           width={width}
           height={height}
           depth={depth}
